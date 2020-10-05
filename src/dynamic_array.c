@@ -4,14 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// typedef int item_type;
-
-// typedef struct {
-//   item_type* ptr;
-//   unsigned capacity;
-//   unsigned size;
-// } dynamic_array_t;
-
 unsigned length(const dynamic_array_t* da) {
   return da->size;
 }

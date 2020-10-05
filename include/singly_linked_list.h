@@ -1,5 +1,5 @@
-#ifndef _SINGLE_LINKED_LIST_H_
-#define _SINGLE_LINKED_LIST_H_
+#ifndef _SINGLY_LINKED_LIST_H_
+#define _SINGLY_LINKED_LIST_H_
 
 #include <stdbool.h>
 
@@ -38,4 +38,4 @@ singly_linked_list(int)
 #define sll_t sll_type_t(int)
 #define node_t sll_node_t(int)
 
-#endif
+#endif /* _SINGLY_LINKED_LIST_H_ */
