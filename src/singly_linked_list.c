@@ -1,21 +1,9 @@
-#include <stdbool.h>
+#include "../include/singly_linked_list.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node {
-  int value;
-  struct node* next;
-
-} node_t;
-
-typedef struct {
-  node_t* head;
-  node_t* tail;
-  unsigned size;
-
-} singly_linked_list_t;
-
-void print(const singly_linked_list_t* sll) {
+void print(const sll_t* sll) {
   const node_t* current = sll->head;
   printf("\n[");
   while (NULL != current) {
@@ -24,7 +12,7 @@ void print(const singly_linked_list_t* sll) {
   }
 }
 
-bool insert_node_at_the_beginning(singly_linked_list_t* sll, const int value) {
+bool insert_node_at_the_beginning(sll_t* sll, const int value) {
   node_t* new_node = (node_t*)malloc(sizeof(node_t));
   if (NULL == new_node)
     return false;
@@ -44,7 +32,7 @@ bool insert_node_at_the_beginning(singly_linked_list_t* sll, const int value) {
   return true;
 }
 
-bool insert_node_at_the_end(singly_linked_list_t* sll, const int value) {
+bool insert_node_at_the_end(sll_t* sll, const int value) {
   node_t* new_node = (node_t*)malloc(sizeof(node_t));
   if (NULL == new_node)
     return false;
@@ -65,7 +53,7 @@ bool insert_node_at_the_end(singly_linked_list_t* sll, const int value) {
   return true;
 }
 
-bool insert_node_at_specified_position(singly_linked_list_t* sll,
+bool insert_node_at_specified_position(sll_t* sll,
                                        const int value,
                                        const unsigned pos) {
   if (0U == pos || pos > sll->size)
@@ -103,7 +91,7 @@ bool insert_node_at_specified_position(singly_linked_list_t* sll,
   return true;
 }
 
-bool delete_first_node(singly_linked_list_t* sll) {
+bool delete_first_node(sll_t* sll) {
   if (NULL == sll->head)
     return false;
 
@@ -117,7 +105,7 @@ bool delete_first_node(singly_linked_list_t* sll) {
   return true;
 }
 
-bool delete_last_node(singly_linked_list_t* sll) {
+bool delete_last_node(sll_t* sll) {
   if (NULL == sll->head)
     return false;
 
@@ -142,8 +130,7 @@ bool delete_last_node(singly_linked_list_t* sll) {
   return true;
 }
 
-bool delete_node_at_specified_position(singly_linked_list_t* sll,
-                                       const unsigned pos) {
+bool delete_node_at_specified_position(sll_t* sll, const unsigned pos) {
   if (NULL == sll->head || 0U == pos || pos > sll->size)
     return false;
 
@@ -171,7 +158,7 @@ bool delete_node_at_specified_position(singly_linked_list_t* sll,
   return false;
 }
 
-void destroy_singly_linked_list(singly_linked_list_t* sll) {
+void destroy_singly_linked_list(sll_t* sll) {
   node_t* current = sll->head;
 
   while (current != NULL) {
@@ -186,7 +173,7 @@ void destroy_singly_linked_list(singly_linked_list_t* sll) {
   sll->size = 0U;
 }
 
-bool reverse_singly_linked_list_in_place(singly_linked_list_t* sll) {
+bool reverse_singly_linked_list_in_place(sll_t* sll) {
   if (NULL == sll->head)
     return false;
 
@@ -208,9 +195,8 @@ bool reverse_singly_linked_list_in_place(singly_linked_list_t* sll) {
   return true;
 }
 
-singly_linked_list_t create_reversed_copy_of_specified_singly_linked_list(
-    const singly_linked_list_t* sll) {
-  singly_linked_list_t new_sll = {0};
+sll_t create_reversed_copy_of_specified_singly_linked_list(const sll_t* sll) {
+  sll_t new_sll = {0};
   const node_t* current = sll->head;
 
   while (NULL != current) {
@@ -219,36 +205,4 @@ singly_linked_list_t create_reversed_copy_of_specified_singly_linked_list(
   }
 
   return new_sll;
-}
-
-int main() {
-  singly_linked_list_t sll = {0};
-
-  insert_node_at_the_beginning(&sll, 1);
-  insert_node_at_the_end(&sll, 3);
-  insert_node_at_the_end(&sll, 5);
-  insert_node_at_the_end(&sll, 7);
-  insert_node_at_the_end(&sll, 8);
-
-  delete_node_at_specified_position(&sll, 3);
-
-  print(&sll);
-
-  if (!reverse_singly_linked_list_in_place(&sll)) {
-    printf(
-        "Error occurred during reversing specified singly linked list in "
-        "place!\n");
-  } else {
-    print(&sll);
-  }
-
-  singly_linked_list_t sll2 =
-      create_reversed_copy_of_specified_singly_linked_list(&sll);
-
-  print(&sll2);
-
-  destroy_singly_linked_list(&sll);
-  destroy_singly_linked_list(&sll2);
-
-  return 0;
 }

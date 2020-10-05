@@ -1,20 +1,7 @@
-#include <stdbool.h>
+#include "../include/doubly_linked_list.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct node {
-  int value;
-  struct node* prev;
-  struct node* next;
-
-} node_t;
-
-typedef struct {
-  node_t* head;
-  node_t* tail;
-  unsigned size;
-
-} doubly_linked_list_t;
 
 void swap(node_t** first, node_t** second) {
   node_t* temp = *first;
@@ -22,7 +9,7 @@ void swap(node_t** first, node_t** second) {
   *second = temp;
 }
 
-void print(const doubly_linked_list_t* dll) {
+void print(const dll_t* dll) {
   const node_t* current = dll->head;
   printf("\n[");
   while (NULL != current) {
@@ -31,7 +18,7 @@ void print(const doubly_linked_list_t* dll) {
   }
 }
 
-bool insert_node_at_the_beginning(doubly_linked_list_t* dll, const int value) {
+bool insert_node_at_the_beginning(dll_t* dll, const int value) {
   node_t* new_node = (node_t*)malloc(sizeof(node_t));
   if (NULL == new_node)
     return false;
@@ -53,7 +40,7 @@ bool insert_node_at_the_beginning(doubly_linked_list_t* dll, const int value) {
   return true;
 }
 
-bool insert_node_at_the_end(doubly_linked_list_t* dll, const int value) {
+bool insert_node_at_the_end(dll_t* dll, const int value) {
   node_t* new_node = (node_t*)malloc(sizeof(node_t));
   if (NULL == new_node)
     return false;
@@ -75,7 +62,7 @@ bool insert_node_at_the_end(doubly_linked_list_t* dll, const int value) {
   return true;
 }
 
-bool insert_node_before_specified_position(doubly_linked_list_t* dll,
+bool insert_node_before_specified_position(dll_t* dll,
                                            const int value,
                                            const unsigned pos) {
   if (NULL == dll->head) {
@@ -120,7 +107,7 @@ bool insert_node_before_specified_position(doubly_linked_list_t* dll,
   return true;
 }
 
-bool insert_node_after_specified_position(doubly_linked_list_t* dll,
+bool insert_node_after_specified_position(dll_t* dll,
                                           const int value,
                                           const unsigned pos) {
   if (NULL == dll->head) {
@@ -160,7 +147,7 @@ bool insert_node_after_specified_position(doubly_linked_list_t* dll,
   return true;
 }
 
-bool delete_first_node(doubly_linked_list_t* dll) {
+bool delete_first_node(dll_t* dll) {
   if (NULL == dll->head)
     return false;
 
@@ -177,7 +164,7 @@ bool delete_first_node(doubly_linked_list_t* dll) {
   return true;
 }
 
-bool delete_last_node(doubly_linked_list_t* dll) {
+bool delete_last_node(dll_t* dll) {
   if (NULL == dll->tail)
     return false;
 
@@ -194,8 +181,7 @@ bool delete_last_node(doubly_linked_list_t* dll) {
   return true;
 }
 
-bool delete_node_at_specified_position(doubly_linked_list_t* dll,
-                                       const unsigned pos) {
+bool delete_node_at_specified_position(dll_t* dll, const unsigned pos) {
   if (NULL == dll->head || 0U == pos || pos > dll->size)
     return false;
 
@@ -223,7 +209,7 @@ bool delete_node_at_specified_position(doubly_linked_list_t* dll,
   return true;
 }
 
-void destroy_doubly_linked_list(doubly_linked_list_t* dll) {
+void destroy_doubly_linked_list(dll_t* dll) {
   node_t* current_node = dll->head;
 
   while (current_node != NULL) {
@@ -238,7 +224,7 @@ void destroy_doubly_linked_list(doubly_linked_list_t* dll) {
   dll->size = 0U;
 }
 
-bool reverse_doubly_linked_list_in_place(doubly_linked_list_t* dll) {
+bool reverse_doubly_linked_list_in_place(dll_t* dll) {
   swap(&(dll->head), &(dll->tail));
   node_t* current = dll->head;
   while (NULL != current) {
@@ -249,9 +235,8 @@ bool reverse_doubly_linked_list_in_place(doubly_linked_list_t* dll) {
   return true;
 }
 
-doubly_linked_list_t create_reversed_copy_of_specified_doubly_linked_list(
-    const doubly_linked_list_t* dll) {
-  doubly_linked_list_t reversed_dll = {0};
+dll_t create_reversed_copy_of_specified_doubly_linked_list(const dll_t* dll) {
+  dll_t reversed_dll = {0};
   const node_t* current = dll->head;
   while (NULL != current) {
     if (!insert_node_at_the_beginning(&reversed_dll, current->value)) {
@@ -263,41 +248,4 @@ doubly_linked_list_t create_reversed_copy_of_specified_doubly_linked_list(
   }
 
   return reversed_dll;
-}
-
-int main() {
-  doubly_linked_list_t dll = {0};
-
-  insert_node_at_the_beginning(&dll, 1);
-  insert_node_at_the_end(&dll, 3);
-  insert_node_before_specified_position(&dll, 2, 2);
-  insert_node_at_the_end(&dll, 5);
-  insert_node_after_specified_position(&dll, 3, 4);
-  insert_node_at_the_end(&dll, 7);
-  insert_node_at_the_end(&dll, 8);
-  insert_node_at_the_beginning(&dll, 0);
-
-  print(&dll);
-
-  delete_node_at_specified_position(&dll, 3);
-
-  print(&dll);
-
-  if (!reverse_doubly_linked_list_in_place(&dll)) {
-    printf(
-        "Error occurred during reversing specified doubly linked list in "
-        "place!\n");
-  } else {
-    print(&dll);
-  }
-
-  doubly_linked_list_t dll2 =
-      create_reversed_copy_of_specified_doubly_linked_list(&dll);
-
-  print(&dll2);
-
-  destroy_doubly_linked_list(&dll);
-  destroy_doubly_linked_list(&dll2);
-
-  return 0;
 }

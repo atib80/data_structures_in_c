@@ -1,15 +1,16 @@
-#include <stdbool.h>
+#include "../include/dynamic_array.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-typedef int item_type;
+// typedef int item_type;
 
-typedef struct {
-  item_type* ptr;
-  unsigned capacity;
-  unsigned size;
-} dynamic_array_t;
+// typedef struct {
+//   item_type* ptr;
+//   unsigned capacity;
+//   unsigned size;
+// } dynamic_array_t;
 
 unsigned length(const dynamic_array_t* da) {
   return da->size;
@@ -74,7 +75,7 @@ bool insert_element_at_the_beginning(dynamic_array_t* da,
   return true;
 }
 
-bool insert_element_at_the_end(dynamic_array_t* da, const int value) {
+bool insert_element_at_the_end(dynamic_array_t* da, const item_type value) {
   if (da->size == da->capacity) {
     if (!increase_specified_dynamic_array_capacity(da))
       return false;
@@ -200,43 +201,4 @@ dynamic_array_t create_reversed_copy_of_specified_dynamic_array(
   for (unsigned i = 0U, j = da->size - 1; i < da->size; ++i, --j)
     reversed_da.ptr[i] = da->ptr[j];
   return reversed_da;
-}
-
-int main() {
-  dynamic_array_t da1 = {0};
-
-  insert_element_at_the_beginning(&da1, 1);
-  insert_element_at_the_end(&da1, 3);
-  insert_element_at_specified_index(&da1, 2, 1);
-  insert_element_at_the_end(&da1, 5);
-  insert_element_at_specified_index(&da1, 4, 3);
-  insert_element_at_the_end(&da1, 7);
-  insert_element_at_the_end(&da1, 8);
-  insert_element_at_the_beginning(&da1, 0);
-
-  print(&da1);
-
-  delete_element_at_specified_index(&da1, 3);
-
-  print(&da1);
-
-  delete_first_element(&da1);
-
-  print(&da1);
-
-  if (!reverse_dynamic_array_in_place(&da1)) {
-    printf(
-        "Error occurred during reversing specified dynamic array in place!\n");
-  } else {
-    print(&da1);
-  }
-
-  dynamic_array_t da2 = create_reversed_copy_of_specified_dynamic_array(&da1);
-
-  print(&da2);
-
-  destroy_dynamic_array(&da1);
-  destroy_dynamic_array(&da2);
-
-  return 0;
 }
