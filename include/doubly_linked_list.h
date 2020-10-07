@@ -222,10 +222,10 @@
   }                                                                            \
                                                                                \
   bool reverse_doubly_linked_list_in_place(dll_t(type) * dll) {                \
-    swap(&(dll->head), &(dll->tail));                                          \
+    swap(&dll->head, &dll->tail);                                              \
     dll_node_t(type)* current = dll->head;                                     \
     while (NULL != current) {                                                  \
-      swap(&(current->prev), &(current->next));                                \
+      swap(&current->prev, &current->next);                                    \
       current = current->next;                                                 \
     }                                                                          \
     return true;                                                               \
