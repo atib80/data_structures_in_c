@@ -25,13 +25,14 @@
     *y = temp;                                                                 \
   }                                                                            \
                                                                                \
-  void print(const dynamic_array_t(type) * da) {                               \
-    printf("\n[");                                                             \
+  void print(const dynamic_array_t(type) * da, const char* sep,                \
+             const char* prefix, const char* suffix) {                         \
+    printf(prefix);                                                            \
     if (0U == da->size) {                                                      \
-      printf("]\n");                                                           \
+      printf(suffix);                                                          \
     } else {                                                                   \
       for (unsigned i = 0U; i != da->size; ++i)                                \
-        printf("%d%s", da->ptr[i], i + 1 != da->size ? "|" : "]\n");           \
+        printf("%d%s", da->ptr[i], i + 1 != da->size ? sep : suffix);          \
     }                                                                          \
   }                                                                            \
                                                                                \
@@ -156,6 +157,16 @@
     da->ptr = NULL;                                                            \
     da->capacity = 0U;                                                         \
     da->size = 0U;                                                             \
+  }                                                                            \
+                                                                               \
+  dynamic_array_t(type) create_copy_of_specified_dynamic_array(                \
+      const dynamic_array_t(type) * da) {                                      \
+    dynamic_array_t(type) da_copy = {0};                                       \
+    da_copy.ptr = (item_type*)malloc(da->capacity * sizeof(item_type));        \
+    da_copy.size = da->size;                                                   \
+    da_copy.capacity = da->capacity;                                           \
+    memcpy(da_copy.ptr, da->ptr, da->size * sizeof(item_type));                \
+    return da_copy;                                                            \
   }                                                                            \
                                                                                \
   bool reverse_dynamic_array_in_place(dynamic_array_t(type) * da) {            \

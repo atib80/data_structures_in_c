@@ -16,27 +16,27 @@ define_dynamic_array(int)
   insert_element_at_the_end(&da1, 8);
   insert_element_at_the_beginning(&da1, 0);
 
-  print(&da1);
+  print(&da1, "|", "\n[", "]\n");
 
   delete_element_at_specified_index(&da1, 3);
 
-  print(&da1);
+  print(&da1, "|", "\n[", "]\n");
 
   delete_first_element(&da1);
 
-  print(&da1);
+  print(&da1, "|", "\n[", "]\n");
 
   if (!reverse_dynamic_array_in_place(&da1)) {
     printf(
         "Error occurred during reversing specified dynamic array in place!\n");
   } else {
-    print(&da1);
+    print(&da1, "|", "\n[", "]\n");
   }
 
   dynamic_array_t(int) da2 =
       create_reversed_copy_of_specified_dynamic_array(&da1);
 
-  print(&da2);
+  print(&da2, "|", "\n[", "]\n");
 
   destroy_dynamic_array(&da1);
   destroy_dynamic_array(&da2);

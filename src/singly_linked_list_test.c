@@ -15,19 +15,19 @@ define_singly_linked_list(int)
 
   delete_node_at_specified_position(&sll, 3);
 
-  print(&sll);
+  print(&sll, " -> ", "\n[", "]\n");
 
   if (!reverse_singly_linked_list_in_place(&sll)) {
     printf(
         "Error occurred during reversing specified singly linked list in "
         "place!\n");
   } else {
-    print(&sll);
+    print(&sll, " -> ", "\n[", "]\n");
   }
 
   sll_t(int) sll2 = create_reversed_copy_of_specified_singly_linked_list(&sll);
 
-  print(&sll2);
+  print(&sll2, " -> ", "\n[", "]\n");
 
   destroy_singly_linked_list(&sll);
   destroy_singly_linked_list(&sll2);
