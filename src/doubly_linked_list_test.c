@@ -1,10 +1,11 @@
 #include "../include/doubly_linked_list.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
-int main() {
-  dll_t dll = {0};
+define_doubly_linked_list(int)
+
+    int main() {
+  dll_t(int) dll = {0};
 
   insert_node_at_the_beginning(&dll, 1);
   insert_node_at_the_end(&dll, 3);
@@ -29,7 +30,7 @@ int main() {
     print(&dll);
   }
 
-  dll_t dll2 = create_reversed_copy_of_specified_doubly_linked_list(&dll);
+  dll_t(int) dll2 = create_reversed_copy_of_specified_doubly_linked_list(&dll);
 
   print(&dll2);
 

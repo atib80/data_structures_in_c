@@ -2,8 +2,10 @@
 
 #include <stdio.h>
 
-int main() {
-  dynamic_array_t da1 = {0};
+define_dynamic_array(int)
+
+    int main() {
+  dynamic_array_t(int) da1 = {0};
 
   insert_element_at_the_beginning(&da1, 1);
   insert_element_at_the_end(&da1, 3);
@@ -31,7 +33,8 @@ int main() {
     print(&da1);
   }
 
-  dynamic_array_t da2 = create_reversed_copy_of_specified_dynamic_array(&da1);
+  dynamic_array_t(int) da2 =
+      create_reversed_copy_of_specified_dynamic_array(&da1);
 
   print(&da2);
 

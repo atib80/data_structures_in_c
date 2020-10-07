@@ -1,10 +1,11 @@
 #include "../include/singly_linked_list.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
-int main() {
-  sll_t sll = {0};
+define_singly_linked_list(int)
+
+    int main() {
+  sll_t(int) sll = {0};
 
   insert_node_at_the_beginning(&sll, 1);
   insert_node_at_the_end(&sll, 3);
@@ -24,7 +25,7 @@ int main() {
     print(&sll);
   }
 
-  sll_t sll2 = create_reversed_copy_of_specified_singly_linked_list(&sll);
+  sll_t(int) sll2 = create_reversed_copy_of_specified_singly_linked_list(&sll);
 
   print(&sll2);
 
