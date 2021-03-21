@@ -24,7 +24,7 @@
     unsigned size;                                                          \
   } dll_t(type);                                                            \
                                                                             \
-  void swap(dll_node_t(type) * *first, dll_node_t(type) * *second) {        \
+  inline void swap(dll_node_t(type) * *first, dll_node_t(type) * *second) { \
     dll_node_t(type)* temp = *first;                                        \
     *first = *second;                                                       \
     *second = temp;                                                         \

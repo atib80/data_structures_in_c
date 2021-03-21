@@ -19,7 +19,7 @@
                                                                                \
   unsigned length(const dynamic_array_t(type) * da) { return da->size; }       \
                                                                                \
-  void swap(item_type* x, item_type* y) {                                      \
+  inline void swap(item_type* x, item_type* y) {                               \
     item_type temp = *x;                                                       \
     *x = *y;                                                                   \
     *y = temp;                                                                 \
