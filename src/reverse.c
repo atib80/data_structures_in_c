@@ -1,7 +1,7 @@
-#include "../include/stack.h"
 #include "../include/reverse.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "../include/stack.h"
 
 create_stack_of(char)
 
