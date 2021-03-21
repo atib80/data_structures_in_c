@@ -1,7 +1,7 @@
+#include "../include/stack.h"
 #include "../include/reverse.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/stack.h"
 
 create_stack_of(char)
 
@@ -21,11 +21,10 @@ create_stack_of(char)
   char ch;
 
   if (!stack_empty(&s) && stack_top(&s, &ch) && '\n' != ch) {
-    stack_push(&s, '\n');
+    putchar('\n');
   }
 
-  while (!stack_empty(&s)) {
-    char ch;
+  while (!stack_empty(&s)) {    
     stack_top(&s, &ch);
     putchar(ch);
     stack_pop(&s);
