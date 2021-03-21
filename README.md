@@ -1,2 +1,3 @@
-# data_structures_in_c
-Implementation of various types of fundamental data structures in the C programming language
+# Data structures in C
+
+This code repository contains the implementation of various types of fundamental data structures in C.
